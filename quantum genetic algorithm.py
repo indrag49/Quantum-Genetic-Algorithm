@@ -125,7 +125,7 @@ def plot_measure(n):
 # The function defined is f(x)=x^(1/x)
 
 def f(x):
-##    return 3+14*x-5*x**2
+##    return 0.5**2*np.sin(2*x)/9.8
     return 0 if x==0 else x**(1/x)
 
 # convert the bits to a decimal equivalent
