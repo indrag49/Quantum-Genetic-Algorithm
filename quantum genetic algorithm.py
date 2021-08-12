@@ -18,6 +18,7 @@ Q11=np.concatenate(np.outer(Q1, Q1))
 Dict={'0':Q0, '1':Q1, '00':Q00, '01':Q01, '10':Q10, '11':Q11}
 
 X=[]
+# example from classical mechanics (Set chrm_qubits=3)
 chrm_qubits=4 # number of qubits in a quantum chromosome
 for n in range(3, 9):
     l=list(itertools.product([0, 1], repeat=n))
@@ -124,9 +125,18 @@ def plot_measure(n):
 
 # The function defined is f(x)=x^(1/x)
 
+## function for example from classical mechanics
+#def f(x):
+#    v0 = 0.5
+#    g = 9.8
+#    return v0**2*np.sin(2*x)/g
+
+# function for x**(1/x) [first example]
 def f(x):
-##    return 0.5**2*np.sin(2*x)/9.8
-    return 0 if x==0 else x**(1/x)
+    if x!=0:
+        return x**(1/x)
+    else:
+        return 0
 
 # convert the bits to a decimal equivalent
 def decode(chromosome):
@@ -190,6 +200,7 @@ def Grovers_search(chromosome):
     print("The probability with which the maximum fitness chromosome is selected from the database")
     print(P)
 
+## David E. Goldberg.Genetic Algorithms in Search, Optimization, and MachineLearning. Addision-Wesley, 1989
 # roullette wheel selection from a quantum population
 def select(population):
     popsize=len(population)
@@ -297,9 +308,6 @@ gen=0
 maxgen=1000 # maximum 1000 iterations
 print("                  Generation=0               ")
 
-# initialization of a quantum population
-##QP=['0000', '0001', '0010', '0011', '0100', '0101', '0110', '0111', '1000', '1001', '1010', '1011', '1100', '1101', '1110', '1111'] 
-
 def change(p): return [int(i) for i in p]
 QPOP=[change(i) for i in QP]
 popsize=len(QPOP)
@@ -334,6 +342,7 @@ while gen<maxgen:
 
 pylab.plot(Gen, F, 'ko', ms=2)
 pylab.ylim(0.5, 2)
+#pylab.ylim(0, 0.07) # example from classical mechanics
 pylab.xlabel("Generations")
 pylab.ylabel("Average Fitness")
 pylab.show()
